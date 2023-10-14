@@ -1,4 +1,4 @@
-package time
+package util
 
 import (
 	"fmt"
@@ -12,6 +12,17 @@ func ParseAllTimes(input []string) []time.Time {
 		output[id] = ParseTime(element)
 	}
 	return output
+}
+
+func ParseDate(input string) time.Time {
+	date, error := time.Parse(time.DateOnly, input)
+
+	if error != nil {
+		fmt.Println(error)
+		return time.Now()
+	}
+
+	return date
 }
 
 func ParseTime(input string) time.Time {

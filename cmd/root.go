@@ -2,28 +2,26 @@ package cmd
 
 import (
 	"fmt"
-	"time"
+	"os"
 
-	gotime "github.com/zzzFelix/gotrack/time"
+	"github.com/spf13/cobra"
 )
 
-func Execute(args []string) {
-	times := gotime.ParseAllTimes(args)
-	determineCmd(times)
+var (
+	rootCmd = &cobra.Command{
+		Use:   "gotrack",
+		Short: "A simple time tracker.",
+		Long:  `Gotrack is a no-frills CLI tool to track working hours. Built with love in Go.`,
+	}
+)
+
+func Execute() {
+	if err := rootCmd.Execute(); err != nil {
+		fmt.Fprintln(os.Stderr, err)
+		os.Exit(1)
+	}
 }
 
-func determineCmd(times []time.Time) {
-	switch len(times) {
-	case 0:
-		fmt.Println("Help!")
-	case 1:
-		fmt.Println("Start time")
-		fmt.Println(times)
-	case 2:
-		fmt.Println("Start and end time")
-		fmt.Println(times)
-	default:
-		fmt.Println("Start, end, break")
-		fmt.Println(times[:2], gotime.GetDuration(times[2]))
-	}
+func init() {
+	rootCmd.AddCommand(saveCmd)
 }
