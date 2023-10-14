@@ -6,6 +6,11 @@ import (
 	"time"
 )
 
+const (
+	TIME_ONLY = "15:04"
+	HOUR_ONLY = "15"
+)
+
 func ParseAllTimes(input []string) []time.Time {
 	output := make([]time.Time, len(input))
 	for id, element := range input {
@@ -26,11 +31,11 @@ func ParseDate(input string) time.Time {
 }
 
 func ParseTime(input string) time.Time {
-	layout := "15:04" // HH:mm
+	layout := TIME_ONLY
 
 	hourOnly := !strings.Contains(input, ":")
 	if hourOnly {
-		layout = "15" // HH
+		layout = HOUR_ONLY
 	}
 
 	date, error := time.Parse(layout, input)
@@ -46,4 +51,20 @@ func ParseTime(input string) time.Time {
 func GetDuration(input time.Time) time.Duration {
 	midnight := time.Date(input.Year(), input.Month(), input.Day(), 0, 0, 0, 0, input.Location())
 	return input.Sub(midnight)
+}
+
+func GetTotalDuration(start time.Time, end time.Time, brk time.Duration) time.Duration {
+	return end.Sub(start) - brk
+}
+
+func FormatTimeOnly(input time.Time) string {
+	return input.Format(TIME_ONLY)
+}
+
+func FormatDuration(d time.Duration) string {
+	d = d.Round(time.Minute)
+	h := d / time.Hour
+	d -= h * time.Hour
+	m := d / time.Minute
+	return fmt.Sprintf("%02d:%02d", h, m)
 }
