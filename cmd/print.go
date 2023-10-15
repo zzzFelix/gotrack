@@ -1,13 +1,15 @@
 package cmd
 
 import (
+	"time"
+
 	"github.com/spf13/cobra"
-	"github.com/zzzFelix/gotrack/print"
+	"github.com/zzzFelix/gotrack/timespan"
 	"github.com/zzzFelix/gotrack/util"
 )
 
 func init() {
-	rootCmd.AddCommand(printCmd)
+	saveCmd.AddCommand(printCmd)
 }
 
 var printCmd = &cobra.Command{
@@ -18,12 +20,15 @@ var printCmd = &cobra.Command{
 	'gotrack print' -- prints working hours for today.`,
 	Args: cobra.MatchAll(cobra.MaximumNArgs(1), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {
+		ts := timespan.Timespan{}
+		date := time.Now()
 		switch len(args) {
 		case 0:
-			print.TimesToday()
+			ts = timespan.GetToday()
 		case 1:
-			date := util.ParseDate(args[0])
-			print.Times(date)
+			date = util.ParseDate(args[0])
+			ts = timespan.Get(date)
 		}
+		ts.Print(date)
 	},
 }

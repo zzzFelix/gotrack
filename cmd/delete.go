@@ -1,16 +1,15 @@
 package cmd
 
 import (
-	"fmt"
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/zzzFelix/gotrack/database"
+	"github.com/zzzFelix/gotrack/timespan"
 	"github.com/zzzFelix/gotrack/util"
 )
 
 func init() {
-	rootCmd.AddCommand(deleteCmd)
+	saveCmd.AddCommand(deleteCmd)
 }
 
 var deleteCmd = &cobra.Command{
@@ -32,9 +31,7 @@ var deleteCmd = &cobra.Command{
 }
 
 func Delete(date time.Time) {
-	fmtDate := date.Format(time.DateOnly)
-	database.Delete(fmtDate)
-	fmt.Printf("Deleted times for %s\n", fmtDate)
+	timespan.Delete(date)
 }
 
 func DeleteToday() {
