@@ -14,8 +14,13 @@ func GetToday() Timespan {
 
 func Get(date time.Time) Timespan {
 	dateOnly := date.Format(time.DateOnly)
-	bytes := database.Get(dateOnly)
+	bytes, err := database.Get(dateOnly)
+
 	ts := Timespan{}
+	if err != nil {
+		fmt.Println(dateOnly, "  ", "No tracked time")
+		return ts
+	}
 	ts.unmarshal(bytes)
 	ts.Print(date)
 	return ts

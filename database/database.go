@@ -31,7 +31,7 @@ func Delete(key string) {
 
 }
 
-func Get(key string) []byte {
+func Get(key string) ([]byte, error) {
 	db := open()
 	output := make([]byte, 0)
 	err := db.View(func(txn *badger.Txn) error {
@@ -45,12 +45,12 @@ func Get(key string) []byte {
 		})
 		return err
 	})
-	if err != nil {
-		log.Println(err)
-	}
 	defer db.Close()
 
-	return output
+	if err != nil {
+		return nil, err
+	}
+	return output, nil
 }
 
 func open() *badger.DB {

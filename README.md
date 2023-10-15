@@ -2,7 +2,7 @@
 A simple CLI for tracking time, written in Go.
 
 > [!WARNING]  
-> Not production ready—do not use!
+> Not production ready—do not use! Currently, only one data point per day is supported.
 
 ## Track time
 - `gotrack [start time] [end time] [break duration] [date]`
@@ -17,6 +17,5 @@ A simple CLI for tracking time, written in Go.
 - `gotrack print [date]`
 - All arguments are optional.
 - Examples:
-    - `gotrack print 2023-08-22 2023-08-30` -- Prints tracked times from 22nd August 2023 to 30th August 2023 (both inclusive).
     - `gotrack print 2023-08-22` -- Prints tracked time for 22nd August 2023.
     - `gotrack print` -- Prints tracked time for today.
