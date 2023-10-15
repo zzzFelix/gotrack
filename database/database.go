@@ -20,6 +20,18 @@ func Persist(key string, val string) {
 	defer db.Close()
 }
 
+func Delete(key string) {
+	db := open()
+	err := db.Update(func(txn *badger.Txn) error {
+		err := txn.Delete([]byte(key))
+		return err
+	})
+	if err != nil {
+		log.Println(err)
+	}
+
+}
+
 func Get(key string) {
 	db := open()
 	err := db.View(func(txn *badger.Txn) error {

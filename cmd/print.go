@@ -15,8 +15,6 @@ var printCmd = &cobra.Command{
 	Short: "Prints times for a given date.",
 	Long: `Prints times for a given date. When no date given, today's times are printed. Examples:
 	'gotrack print 2023-05-01' -- prints working hours for 1st May 2023.
-	'gotrack print tomorrow' -- prints working hours for tomorrow.
-	'gotrack print yesterday' -- prints working hours for yesterday.
 	'gotrack print' -- prints working hours for today.`,
 	Args: cobra.MatchAll(cobra.MaximumNArgs(1), cobra.OnlyValidArgs),
 	Run: func(cmd *cobra.Command, args []string) {

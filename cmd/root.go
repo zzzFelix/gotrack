@@ -16,8 +16,6 @@ var (
 		Short: "A simple time tracker.",
 		Long: `Gotrack is a no-frills CLI tool to track working hours. Built with love in Go. Examples:
 	'gotrack 09:00 17:00 0:45 2023-05-01' -- tracks working hours from 9 to 17h with a 45 minute break for 1st May 2023.
-	'gotrack 09:00 17:00 0:45 tomorrow' -- tracks working hours from 9 to 17h with a 45 minute break for tomorrow.
-	'gotrack 09:00 17:00 0:45 yesterday' -- tracks working hours from 9 to 17h with a 45 minute break for yesterday.
 	'gotrack 9 17 1' -- tracks working hours from 9 to 17h with a 1 hour break. Since no date is specified, times are stored for today.
 	'gotrack 9 12:30' -- tracks working hours from 9 to 12:30 with no break. Since no date is specified, times are stored for today.
 	'gotrack 8:30' -- tracks working hours from 8:30 to the current time, no break.`,
