@@ -31,8 +31,8 @@ func (ts *Timespan) unmarshal(bytes []byte) *Timespan {
 }
 
 func (ts *Timespan) Print(date time.Time) {
-	fmtDate := date.Format(time.DateOnly)
-	fmtVal := fmt.Sprintf("%s    %s to %s", fmtDate, util.FormatTimeOnly(ts.Start), util.FormatTimeOnly(ts.End))
+	day := util.FormatDay(date)
+	fmtVal := fmt.Sprintf("%s    %s to %s", day, util.FormatTimeOnly(ts.Start), util.FormatTimeOnly(ts.End))
 	if ts.Brk.Minutes() > 0 {
 		fmtBreak := fmt.Sprintf(" (-%s)", util.FormatDuration(ts.Brk))
 		fmtVal += fmtBreak

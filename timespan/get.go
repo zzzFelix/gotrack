@@ -18,7 +18,8 @@ func Get(date time.Time) Timespan {
 
 	ts := Timespan{}
 	if err != nil {
-		fmt.Println(dateOnly, "  ", "No tracked time")
+		day := util.FormatDay(date)
+		fmt.Println(day, "  ", "No tracked time")
 		return ts
 	}
 	ts.unmarshal(bytes)

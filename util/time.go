@@ -68,3 +68,9 @@ func FormatDuration(d time.Duration) string {
 	m := d / time.Minute
 	return fmt.Sprintf("%02d:%02d", h, m)
 }
+
+func FormatDay(t time.Time) string {
+	weekday := t.Weekday().String()[:3]
+	dateOnly := t.Format(time.DateOnly)
+	return fmt.Sprintf("%s %s", weekday, dateOnly)
+}
