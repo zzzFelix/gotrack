@@ -29,10 +29,22 @@ func Get(date time.Time) Timespan {
 
 func GetMultipleDays(start time.Time, end time.Time) time.Duration {
 	totalDuration := time.Duration(0)
+	dividend := 0
 	for i := start; i.Before(end.AddDate(0, 0, 1)); i = i.AddDate(0, 0, 1) {
 		ts := Get(i)
-		totalDuration += util.GetTotalDuration(ts.Start, ts.End, ts.Brk)
+		duration := util.GetTotalDuration(ts.Start, ts.End, ts.Brk)
+		totalDuration += duration
+		if duration != time.Duration(0) {
+			dividend++
+		}
 	}
-	fmt.Printf("[TOTAL TRACKED TIME] %s\n", util.FormatDuration(totalDuration))
+	fmt.Printf("[TOTAL] %s\n[AVG] %s\n", util.FormatDuration(totalDuration), util.FormatDuration(average(totalDuration, dividend)))
 	return totalDuration
+}
+
+func average(totalDuration time.Duration, days int) time.Duration {
+	if days == 0 {
+        return 0
+    }
+    return totalDuration / time.Duration(days)
 }
