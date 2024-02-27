@@ -22,3 +22,6 @@ A simple CLI for tracking time, written in Go.
 - Examples:
     - `gotrack print 2023-08-22` -- Prints tracked time for 22nd August 2023.
     - `gotrack print` -- Prints tracked time for today.
+
+## Configure
+- Set environment variable `GOTRACK_DB_PATH`: Path to database, defaults to `~/gotrack`
