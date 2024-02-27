@@ -20,8 +20,6 @@ var (
 		Args: cobra.MatchAll(cobra.RangeArgs(1, 4), cobra.OnlyValidArgs),
 		RunE: func(cmd *cobra.Command, args []string) error {
 			switch len(args) {
-			case 0:
-				cmd.Help()
 			case 1:
 				start := internaltime.ParseTime(args[0])
 				ts := timesToTimespan(start, time.Now(), time.Duration(0))
