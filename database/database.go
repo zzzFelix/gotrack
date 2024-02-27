@@ -2,8 +2,14 @@ package database
 
 import (
 	"log"
+	"os"
 
 	badger "github.com/dgraph-io/badger/v4"
+)
+
+const (
+	dbPathEnv   = "GOTRACK_DB_PATH"
+	defaultPath = "~/gotrack"
 )
 
 func Persist(key string, val []byte) {
@@ -54,9 +60,18 @@ func Get(key string) ([]byte, error) {
 }
 
 func open() *badger.DB {
-	db, err := badger.Open(badger.DefaultOptions("/tmp/gotrack").WithLogger(nil))
+	path := dbPath()
+	db, err := badger.Open(badger.DefaultOptions(path).WithLogger(nil))
 	if err != nil {
 		log.Fatal(err)
 	}
 	return db
+}
+
+func dbPath() string {
+	path, isPresent := os.LookupEnv(dbPathEnv)
+	if !isPresent {
+		return defaultPath
+	}
+	return path
 }
