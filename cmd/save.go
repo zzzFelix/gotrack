@@ -18,7 +18,7 @@ var (
 	'gotrack 9 12:30' -- tracks working hours from 9 to 12:30 with no break. Since no date is specified, times are stored for today.
 	'gotrack 8:30' -- tracks working hours from 8:30 to the current time, no break.`,
 		Args: cobra.MatchAll(cobra.RangeArgs(1, 4), cobra.OnlyValidArgs),
-		Run: func(cmd *cobra.Command, args []string) {
+		RunE: func(cmd *cobra.Command, args []string) error {
 			switch len(args) {
 			case 0:
 				cmd.Help()
@@ -42,6 +42,7 @@ var (
 				date := internaltime.ParseDate(args[3])
 				timespan.Save(ts, date)
 			}
+			return nil
 		},
 	}
 )

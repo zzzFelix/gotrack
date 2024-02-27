@@ -16,11 +16,11 @@ func Execute() {
 
 var (
 	rootCmd = &cobra.Command{
-		Run: func(cmd *cobra.Command, args []string) {
+		RunE: func(cmd *cobra.Command, args []string) error {
 			if len(args) == 0 || len(args) > 4 {
-				saveCmd.Help()
+				return saveCmd.Help()
 			} else {
-				saveCmd.Execute()
+				return saveCmd.Execute()
 			}
 		},
 	}

@@ -19,7 +19,7 @@ var deleteCmd = &cobra.Command{
 	'gotrack delete 2023-05-01' -- deletes working hours for 1st May 2023.
 	'gotrack delete' -- deletes working hours for today.`,
 	Args: cobra.MatchAll(cobra.MaximumNArgs(1), cobra.OnlyValidArgs),
-	Run: func(cmd *cobra.Command, args []string) {
+	RunE: func(cmd *cobra.Command, args []string) error {
 		switch len(args) {
 		case 0:
 			DeleteToday()
@@ -27,6 +27,7 @@ var deleteCmd = &cobra.Command{
 			date := internaltime.ParseDate(args[0])
 			Delete(date)
 		}
+		return nil
 	},
 }
 
