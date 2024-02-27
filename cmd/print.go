@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"github.com/spf13/cobra"
-	"github.com/zzzFelix/gotrack/timespan"
-	"github.com/zzzFelix/gotrack/util"
+	internaltime "github.com/zzzFelix/gotrack/internal/time"
+	"github.com/zzzFelix/gotrack/internal/timespan"
 )
 
 func init() {
@@ -23,11 +23,11 @@ var printCmd = &cobra.Command{
 		case 0:
 			timespan.GetToday()
 		case 1:
-			date := util.ParseDate(args[0])
+			date := internaltime.ParseDate(args[0])
 			timespan.Get(date)
 		case 2:
-			start := util.ParseDate(args[0])
-			end := util.ParseDate(args[1])
+			start := internaltime.ParseDate(args[0])
+			end := internaltime.ParseDate(args[1])
 			timespan.GetMultipleDays(start, end)
 		}
 	},

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zzzFelix/gotrack/database"
+	"github.com/zzzFelix/gotrack/internal/database"
 )
 
 func Delete(date time.Time) {

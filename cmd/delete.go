@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/zzzFelix/gotrack/timespan"
-	"github.com/zzzFelix/gotrack/util"
+	internaltime "github.com/zzzFelix/gotrack/internal/time"
+	"github.com/zzzFelix/gotrack/internal/timespan"
 )
 
 func init() {
@@ -24,7 +24,7 @@ var deleteCmd = &cobra.Command{
 		case 0:
 			DeleteToday()
 		case 1:
-			date := util.ParseDate(args[0])
+			date := internaltime.ParseDate(args[0])
 			Delete(date)
 		}
 	},

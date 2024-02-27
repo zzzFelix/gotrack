@@ -4,8 +4,8 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"github.com/zzzFelix/gotrack/timespan"
-	"github.com/zzzFelix/gotrack/util"
+	internaltime "github.com/zzzFelix/gotrack/internal/time"
+	"github.com/zzzFelix/gotrack/internal/timespan"
 )
 
 var (
@@ -23,23 +23,23 @@ var (
 			case 0:
 				cmd.Help()
 			case 1:
-				start := util.ParseTime(args[0])
+				start := internaltime.ParseTime(args[0])
 				ts := timesToTimespan(start, time.Now(), time.Duration(0))
 				timespan.SaveToday(ts)
 			case 2:
-				times := util.ParseAllTimes(args)
+				times := internaltime.ParseAllTimes(args)
 				ts := timesToTimespan(times[0], times[1], time.Duration(0))
 				timespan.SaveToday(ts)
 			case 3:
-				times := util.ParseAllTimes(args)
-				brk := util.GetDuration(times[2])
+				times := internaltime.ParseAllTimes(args)
+				brk := internaltime.GetDuration(times[2])
 				ts := timesToTimespan(times[0], times[1], brk)
 				timespan.SaveToday(ts)
 			case 4:
-				times := util.ParseAllTimes(args[:3])
-				brk := util.GetDuration(times[2])
+				times := internaltime.ParseAllTimes(args[:3])
+				brk := internaltime.GetDuration(times[2])
 				ts := timesToTimespan(times[0], times[1], brk)
-				date := util.ParseDate(args[3])
+				date := internaltime.ParseDate(args[3])
 				timespan.Save(ts, date)
 			}
 		},

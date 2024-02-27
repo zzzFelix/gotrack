@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zzzFelix/gotrack/util"
+	internaltime "github.com/zzzFelix/gotrack/internal/time"
 )
 
 type Timespan struct {
@@ -31,12 +31,12 @@ func (ts *Timespan) unmarshal(bytes []byte) *Timespan {
 }
 
 func (ts *Timespan) Print(date time.Time) {
-	day := util.FormatDay(date)
-	fmtVal := fmt.Sprintf("%s    %s to %s", day, util.FormatTimeOnly(ts.Start), util.FormatTimeOnly(ts.End))
+	day := internaltime.FormatDay(date)
+	fmtVal := fmt.Sprintf("%s    %s to %s", day, internaltime.FormatTimeOnly(ts.Start), internaltime.FormatTimeOnly(ts.End))
 	if ts.Brk.Minutes() > 0 {
-		fmtBreak := fmt.Sprintf(" (-%s)", util.FormatDuration(ts.Brk))
+		fmtBreak := fmt.Sprintf(" (-%s)", internaltime.FormatDuration(ts.Brk))
 		fmtVal += fmtBreak
 	}
-	fmtVal += fmt.Sprintf("    total: %s", util.FormatDuration(util.GetTotalDuration(ts.Start, ts.End, ts.Brk)))
+	fmtVal += fmt.Sprintf("    total: %s", internaltime.FormatDuration(internaltime.GetTotalDuration(ts.Start, ts.End, ts.Brk)))
 	fmt.Println(fmtVal)
 }

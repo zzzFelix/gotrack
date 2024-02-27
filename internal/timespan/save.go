@@ -3,7 +3,7 @@ package timespan
 import (
 	"time"
 
-	"github.com/zzzFelix/gotrack/database"
+	"github.com/zzzFelix/gotrack/internal/database"
 )
 
 func Save(ts Timespan, date time.Time) {

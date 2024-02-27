@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/zzzFelix/gotrack/database"
-	"github.com/zzzFelix/gotrack/util"
+	"github.com/zzzFelix/gotrack/internal/database"
+	internaltime "github.com/zzzFelix/gotrack/internal/time"
 )
 
 func GetToday() Timespan {
@@ -18,7 +18,7 @@ func Get(date time.Time) Timespan {
 
 	ts := Timespan{}
 	if err != nil {
-		day := util.FormatDay(date)
+		day := internaltime.FormatDay(date)
 		fmt.Println(day, "  ", "No tracked time")
 		return ts
 	}
@@ -32,19 +32,19 @@ func GetMultipleDays(start time.Time, end time.Time) time.Duration {
 	dividend := 0
 	for i := start; i.Before(end.AddDate(0, 0, 1)); i = i.AddDate(0, 0, 1) {
 		ts := Get(i)
-		duration := util.GetTotalDuration(ts.Start, ts.End, ts.Brk)
+		duration := internaltime.GetTotalDuration(ts.Start, ts.End, ts.Brk)
 		totalDuration += duration
 		if duration != time.Duration(0) {
 			dividend++
 		}
 	}
-	fmt.Printf("[TOTAL] %s\n[AVG] %s\n", util.FormatDuration(totalDuration), util.FormatDuration(average(totalDuration, dividend)))
+	fmt.Printf("[TOTAL] %s\n[AVG] %s\n", internaltime.FormatDuration(totalDuration), internaltime.FormatDuration(average(totalDuration, dividend)))
 	return totalDuration
 }
 
 func average(totalDuration time.Duration, days int) time.Duration {
 	if days == 0 {
-        return 0
-    }
-    return totalDuration / time.Duration(days)
+		return 0
+	}
+	return totalDuration / time.Duration(days)
 }
