@@ -4,6 +4,9 @@ A simple CLI for tracking time, written in Go.
 > [!WARNING]  
 > Not production ready—do not use! Currently, only one data point per day is supported.
 
+## Install
+`go install github.com/zzzFelix/gotrack`
+
 ## Track time
 - `gotrack [start time] [end time] [break duration] [date]`
 - All arguments except `start time` are optional.
