@@ -4,4 +4,8 @@ test:
 
 .PHONY: build
 build:
-	go build -v ./...
+	go build -v .
+
+.PHONY: install
+install:
+	go install .
