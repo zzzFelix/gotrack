@@ -9,7 +9,7 @@ import (
 
 const (
 	dbPathEnv   = "GOTRACK_DB_PATH"
-	defaultPath = "~/gotrack"
+	defaultPath = "gotrack"
 )
 
 func Persist(key string, val []byte) {
