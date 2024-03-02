@@ -7,8 +7,12 @@ import (
 	"github.com/zzzFelix/gotrack/internal/database"
 )
 
-func Delete(date time.Time) {
+func Delete(date time.Time) error {
 	fmtDate := date.Format(time.DateOnly)
-	database.Delete(fmtDate)
+	err := database.Delete(fmtDate)
+	if err != nil {
+		return err
+	}
 	fmt.Printf("Deleted times for %s\n", fmtDate)
+	return nil
 }
