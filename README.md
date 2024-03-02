@@ -24,4 +24,4 @@ A simple CLI for tracking time, written in Go.
     - `gotrack print` -- Prints tracked time for today.
 
 ## Configure
-- Set environment variable `GOTRACK_DB_PATH`: Path to database, defaults to `gotrack`
+- Set environment variable `GOTRACK_DB_PATH`: Path to database, defaults to `~/gotrack` where `~` gets replaced with the user's home directory (if they have one) as determined by `os.user`
