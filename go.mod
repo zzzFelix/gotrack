@@ -5,7 +5,7 @@ go 1.24.0
 toolchain go1.24.1
 
 require (
-	github.com/dgraph-io/badger/v4 v4.9.3
+	github.com/dgraph-io/badger/v4 v4.9.4
 	github.com/spf13/cobra v1.10.2
 )
 
